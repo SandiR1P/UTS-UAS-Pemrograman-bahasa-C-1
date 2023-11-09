@@ -1,98 +1,65 @@
 #include <stdio.h>
 
-// Deklarasi konstanta untuk level kekeruhan air
-#define NUM_LEVELS 9
-int kekeruhanLevels[NUM_LEVELS] = {6, 8, 12, 18, 24, 30, 36, 42, 49};
-
-// Fungsi untuk mendapatkan kecepatan motor berdasarkan level kekeruhan
-int getKecepatanMotor(int level) {
-    if (level >= 6 && level <= 49) {
-        // Fuzzy logic atau aturan kecepatan motor dapat ditambahkan di sini
-        return 1000; // Kecepatan motor default
-    } else {
-        // Level kekeruhan tidak valid
-        printf("Level kekeruhan tidak valid\n");
-        return -1;
+// Fungsi untuk menghitung kecepatan motor berdasarkan level kekeruhan air
+int hitungKecepatan(int level) {
+    int kecepatan;
+    
+    switch (level) {
+        case 6:
+            kecepatan = 1200;
+            break;
+        case 8:
+            kecepatan = 1400;
+            break;
+        case 12:
+            kecepatan = 1600;
+            break;
+        case 18:
+            kecepatan = 1800;
+            break;
+        case 24:
+            kecepatan = 2000;
+            break;
+        case 30:
+            kecepatan = 2200;
+            break;
+        case 36:
+            kecepatan = 2400;
+            break;
+        case 42:
+            kecepatan = 2600;
+            break;
+        case 49:
+            kecepatan = 2800;
+            break;
+        default:
+            kecepatan = 1000;  // Default jika level tidak valid
+            break;
     }
-}
 
-// Fungsi untuk mendapatkan waktu mencuci berdasarkan level kekeruhan
-int getWaktuMencuci(int level) {
-    if (level >= 6 && level <= 49) {
-        // Fuzzy logic atau aturan waktu mencuci dapat ditambahkan di sini
-        return 60; // Waktu mencuci default
-    } else {
-        // Level kekeruhan tidak valid
-        printf("Level kekeruhan tidak valid\n");
-        return -1;
-    }
-}
-
-// Fungsi untuk menggerakkan motor pembuka klep pengisian air
-void motorPembukaKlepPengisianAir() {
-    // Implementasi untuk menggerakkan motor pembuka klep pengisian air
-    printf("Motor pembuka klep pengisian air bergerak\n");
-}
-
-// Fungsi untuk menggerakkan motor utama
-void motorUtamaBerputar() {
-    // Implementasi untuk menggerakkan motor utama
-    printf("Motor utama berputar\n");
-}
-
-// Fungsi untuk menggerakkan motor pembuka klep pembuangan air kotor
-void motorPembukaKlepPembuanganAirKotor() {
-    // Implementasi untuk menggerakkan motor pembuka klep pembuangan air kotor
-    printf("Motor pembuka klep pembuangan air kotor bergerak\n");
-}
-
-// Fungsi untuk mengeringkan cucian
-void mengeringkanCucian() {
-    // Implementasi untuk mengeringkan cucian
-    printf("Mengeringkan cucian\n");
+    return kecepatan;
 }
 
 int main() {
-    // Tombol start ditekan
-    printf("Tombol start ditekan\n");
+    int level_kekeruhan;
+    
+    // Input level kekeruhan air
+    printf("Masukkan level kekeruhan air: ");
+    scanf("%d", &level_kekeruhan);
 
-    // Motor pembuka klep pengisian air bergerak selama 2 menit
-    motorPembukaKlepPengisianAir();
-    printf("Air penuh\n");
+    // Hitung kecepatan motor berdasarkan level kekeruhan
+    int kecepatan_motor = hitungKecepatan(level_kekeruhan);
 
-    // Mendeteksi level kekeruhan air
-    int levelKekruhan = 24; // Anda bisa mengganti nilai level kekeruhan sesuai kebutuhan
-
-    // Menggerakkan motor utama
-    int kecepatanMotor = getKecepatanMotor(levelKekruhan);
-    int waktuMencuci = getWaktuMencuci(levelKekruhan);
-
-    if (kecepatanMotor != -1 && waktuMencuci != -1) {
-        motorUtamaBerputar();
-
-        // Motor pembuka klep pembuangan air kotor bergerak selama 2 menit
-        motorPembukaKlepPembuanganAirKotor();
-        printf("Air kotor habis\n");
-
-        // Mengeringkan cucian selama 3 menit dengan kecepatan 2000 rpm
-        mengeringkanCucian();
-        printf("Cucian selesai\n");
-
-        // Motor pembuka klep pengisian air bergerak selama 2 menit
-        motorPembukaKlepPengisianAir();
-        printf("Air penuh\n");
-
-        // Motor utama berputar selama sisa waktu mencuci
-        printf("Motor utama berputar selama %d menit\n", waktuMencuci);
-
-        // Motor pembuka klep pembuangan air kotor bergerak selama 2 menit
-        motorPembukaKlepPembuanganAirKotor();
-        printf("Air kotor habis\n");
-
-        // Mengeringkan cucian selama 3 menit dengan kecepatan 2000 rpm
-        mengeringkanCucian();
-        printf("Cucian selesai\n");
-    }
+    // Menampilkan informasi
+    printf("Motor listrik pembuka klep pengisian air aktif selama 2 menit sampai air penuh\n");
+    printf("Sensor turbidimeter aktif hanya satu kali untuk mendeteksi level kekeruhan air.\n");
+    printf("Motor listrik utama berputar dengan kecepatan %d rpm selama 60 menit.\n", kecepatan_motor);
+    printf("Motor listrik pembuka klep pembuangan air kotor aktif selama 2 menit sampai air kotor habis.\n");
+    printf("Motor listrik utama berputar dengan kecepatan 2000 rpm untuk mengeringkan cucian selama 3 menit.\n");
+    printf("Motor listrik pembuka klep pengisian air aktif selama 2 menit sampai air penuh.\n");
+    printf("Motor listrik utama berputar selama 60 menit.\n");
+    printf("Motor listrik pembuka klep pembuangan air kotor aktif selama 2 menit sampai air habis.\n");
+    printf("Motor listrik utama berputar dengan kecepatan 2000 rpm untuk mengeringkan cucian selama 3 menit.\n");
 
     return 0;
 }
