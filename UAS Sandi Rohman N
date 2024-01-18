@@ -22,42 +22,45 @@ int deteksiKekeruhanAir(int kekeruhan) {
     }
 }
 
+// Function untuk menjalankan mesin cuci
+void jalankanMesinCuci(int kekeruhan) {
+    printf("\nMesin cuci untuk level kekeruhan %d NTU:\n", kekeruhan);
+
+    // Step 1: Motor pembuka klep pengisian air
+    putarMotorPembukaKlep(2);
+
+    // Step 2: Sensor turbidimeter untuk mendeteksi level kekeruhan air
+    int kecepatanMotorUtama = deteksiKekeruhanAir(kekeruhan);
+
+    // Step 3: Motor listrik utama
+    putarMotorUtama(kecepatanMotorUtama, 60);
+
+    // Step 4: Motor pembuka klep pembuangan air kotor
+    putarMotorPembukaKlep(2);
+
+    // Step 5: Motor listrik utama untuk mengeringkan cucian
+    putarMotorUtama(2000, 3);
+
+    // Step 6: Motor pembuka klep pengisian air
+    putarMotorPembukaKlep(2);
+
+    // Step 7: Motor listrik utama untuk sisa waktu mencuci
+    putarMotorUtama(kecepatanMotorUtama, 60);
+
+    // Step 8: Motor pembuka klep pembuangan air kotor
+    putarMotorPembukaKlep(2);
+
+    // Step 9: Motor listrik utama untuk mengeringkan cucian
+    putarMotorUtama(2000, 3);
+}
+
 // Function utama
 int main() {
-    int levelKekeruhan[] = {6, 8, 12, 18, 24, 30, 36, 42, 49};
-    int jumlahLevel = sizeof(levelKekeruhan) / sizeof(levelKekeruhan[0]);
+    int levelKekeruhan;
+    printf("Masukkan level kekeruhan air (6, 8, 12, 18, 24, 30, 36, 42, 49): ");
+    scanf("%d", &levelKekeruhan);
 
-    // Menjalankan mesin cuci untuk setiap level kekeruhan
-    for (int i = 0; i < jumlahLevel; i++) {
-        printf("\nMesin cuci untuk level kekeruhan %d NTU:\n", levelKekeruhan[i]);
-
-        // Step 1: Motor pembuka klep pengisian air
-        putarMotorPembukaKlep(2);
-
-        // Step 2: Sensor turbidimeter untuk mendeteksi level kekeruhan air
-        int kecepatanMotorUtama = deteksiKekeruhanAir(levelKekeruhan[i]);
-
-        // Step 3: Motor listrik utama
-        putarMotorUtama(kecepatanMotorUtama, 60);
-
-        // Step 4: Motor pembuka klep pembuangan air kotor
-        putarMotorPembukaKlep(2);
-
-        // Step 5: Motor listrik utama untuk mengeringkan cucian
-        putarMotorUtama(2000, 3);
-
-        // Step 6: Motor pembuka klep pengisian air
-        putarMotorPembukaKlep(2);
-
-        // Step 7: Motor listrik utama untuk sisa waktu mencuci
-        putarMotorUtama(kecepatanMotorUtama, 60);
-
-        // Step 8: Motor pembuka klep pembuangan air kotor
-        putarMotorPembukaKlep(2);
-
-        // Step 9: Motor listrik utama untuk mengeringkan cucian
-        putarMotorUtama(2000, 3);
-    }
+    jalankanMesinCuci(levelKekeruhan);
 
     return 0;
 }
