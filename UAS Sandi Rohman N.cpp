@@ -7,7 +7,7 @@ void putarMotorUtama(int rpm, int waktu) {
 
 // Function untuk mengatur motor pembuka klep
 void putarMotorPembukaKlep(int waktu) {
-    printf("Motor pembuka klep berputar selama %d menit.\n", waktu);
+    printf("Motor pembuka klep terbuka selama %d menit.\n", waktu);
 }
 
 // Function untuk mendeteksi level kekeruhan air
